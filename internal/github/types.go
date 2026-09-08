@@ -121,7 +121,7 @@ type Discussion struct {
 	Category  string              `json:"category"`
 	Author    string              `json:"author"`
 	AnswerID  string              `json:"answerId,omitempty"`
-	Locked    bool                `json:"locked,omitempty"`
+	Locked    bool                `json:"locked"`
 	CreatedAt time.Time           `json:"createdAt"`
 	UpdatedAt time.Time           `json:"updatedAt"`
 	Comments  []DiscussionComment `json:"comments"`
