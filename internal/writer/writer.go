@@ -37,11 +37,17 @@ func finishMarkdown(sb *strings.Builder) string {
 }
 
 // writeCommentHeader writes the common comment metadata block.
-func writeCommentHeader(sb *strings.Builder, tagName, id, author string, createdAt time.Time) {
+func writeCommentHeader(sb *strings.Builder, tagName, id, author, url string, createdAt, updatedAt time.Time) {
 	fmt.Fprintf(sb, "<!-- gh-md:%s\n", tagName)
 	fmt.Fprintf(sb, "id: %s\n", id)
 	fmt.Fprintf(sb, "author: %s\n", author)
 	fmt.Fprintf(sb, "created: %s\n", createdAt.Format(time.RFC3339))
+	if !updatedAt.IsZero() {
+		fmt.Fprintf(sb, "updated: %s\n", updatedAt.Format(time.RFC3339))
+	}
+	if url != "" {
+		fmt.Fprintf(sb, "url: %s\n", url)
+	}
 	sb.WriteString("-->\n")
 }
 
@@ -254,6 +260,7 @@ func DiscussionToMarkdown(d *github.Discussion) (string, error) {
 			Owner:      d.Owner,
 			Repo:       d.Repo,
 			Title:      d.Title,
+			Body:       d.Body,
 			State:      d.State,
 			Author:     d.Author,
 			Created:    d.CreatedAt,
@@ -281,7 +288,7 @@ func DiscussionToMarkdown(d *github.Discussion) (string, error) {
 }
 
 func writeComment(sb *strings.Builder, c github.Comment) {
-	writeCommentHeader(sb, "comment", c.ID, c.Author, c.CreatedAt)
+	writeCommentHeader(sb, "comment", c.ID, c.Author, c.URL, c.CreatedAt, c.UpdatedAt)
 	writeCommentBody(sb, "comment", c.Author, c.Body, c.CreatedAt, "###")
 }
 
