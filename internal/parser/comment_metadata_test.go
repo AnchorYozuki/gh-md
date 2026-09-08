@@ -56,7 +56,7 @@ edited comment
 	if comment.Author != "commenter" {
 		t.Errorf("comment Author = %q, want commenter", comment.Author)
 	}
-	if comment.Body != "### @commenter (2026-09-08)\n\nedited comment" {
-		t.Errorf("comment Body = %q", comment.Body)
+	if comment.Body != "edited comment" {
+		t.Errorf("comment Body = %q, want edited comment", comment.Body)
 	}
 }
