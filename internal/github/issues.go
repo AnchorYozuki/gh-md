@@ -38,6 +38,7 @@ query($owner: String!, $repo: String!, $first: Int!, $after: String, $states: [I
         comments(first: 100) {
           nodes {
             id
+            url
             body
             createdAt
             updatedAt
@@ -109,6 +110,7 @@ query($owner: String!, $repo: String!, $number: Int!) {
       comments(first: 100) {
         nodes {
           id
+          url
           body
           createdAt
           updatedAt
@@ -230,6 +232,7 @@ type IssueNode struct {
 	Comments struct {
 		Nodes []struct {
 			ID        string    `json:"id"`
+			URL       string    `json:"url"`
 			Body      string    `json:"body"`
 			CreatedAt time.Time `json:"createdAt"`
 			UpdatedAt time.Time `json:"updatedAt"`
@@ -331,6 +334,7 @@ func nodeToIssue(node IssueNode, owner, repo string) *Issue {
 	for _, c := range node.Comments.Nodes {
 		comments = append(comments, Comment{
 			ID:        c.ID,
+			URL:       c.URL,
 			Author:    c.Author.Login,
 			Body:      c.Body,
 			CreatedAt: c.CreatedAt,

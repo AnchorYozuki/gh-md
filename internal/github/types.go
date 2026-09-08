@@ -8,6 +8,7 @@ import (
 // Comment represents a comment on an issue, PR, or discussion.
 type Comment struct {
 	ID        string    `json:"id"`
+	URL       string    `json:"url"`
 	Author    string    `json:"author"`
 	Body      string    `json:"body"`
 	CreatedAt time.Time `json:"createdAt"`
