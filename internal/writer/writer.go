@@ -260,7 +260,6 @@ func DiscussionToMarkdown(d *github.Discussion) (string, error) {
 			Owner:      d.Owner,
 			Repo:       d.Repo,
 			Title:      d.Title,
-			Body:       d.Body,
 			State:      d.State,
 			Author:     d.Author,
 			Created:    d.CreatedAt,
